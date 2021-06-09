@@ -8,7 +8,7 @@ class DateFormatter {
 
     fun toTextDay(day: String, month: String, year: String): String {
         val calendar = GregorianCalendar(year.toInt(), month.toInt() - 1, day.toInt())
-        val df: DateFormat = SimpleDateFormat("dd MMMM, EEEE")
+        val df: DateFormat = SimpleDateFormat("dd MMMM, EEEE", Locale("ru"))
         calendar.isLenient = false
 
         return try {
