@@ -7,14 +7,10 @@ import kotlin.reflect.KClass
 class Blocks {
 
     fun getData(blockA: Array<Any>, blockB: KClass<*>): Any {
-        val filteredArray = blockA.filter {
-            blockB.isInstance(it)
-        }
-
-        return when (filteredArray[0]) {
-            is Int -> (filteredArray as List<Int>).sum()
-            is String -> filteredArray.joinToString("")
-            is LocalDate -> getClosestDateString(filteredArray as List<LocalDate>)
+        return when (blockB) {
+            Int::class -> blockA.filterIsInstance<Int>().sum()
+            String::class -> blockA.filterIsInstance<String>().joinToString("")
+            LocalDate::class -> getClosestDateString(blockA.filterIsInstance<LocalDate>())
             else -> "Incompatible class type"
         }
     }
